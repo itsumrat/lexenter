@@ -12,6 +12,9 @@ use App\Model\CotextParagraph;
 use App\Model\TermContext;
 use App\Model\TermEngCha;
 use Illuminate\Http\Request;
+use App\Imports\ContextImport;
+use Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContextController extends Controller
 {
@@ -22,7 +25,7 @@ class ContextController extends Controller
      */
     public function index()
     {
-        $contexts = CotextParagraph::with('paracontext','temrs')->orderBy('id', 'DESC')->paginate(20);
+        $contexts = CotextParagraph::with('paracontext', 'temrs')->orderBy('id', 'DESC')->paginate(20);
         //dd($contexts);
         return view('modules.context.index', compact('contexts'));
     }
@@ -54,11 +57,12 @@ class ContextController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $epara = explode('</p>', $request->epara);
         $cpara = explode('</p>', $request->cpara);
 
@@ -66,13 +70,13 @@ class ContextController extends Controller
         $ccount = count($cpara);
         if ($count == $ccount) {
             $narray = array();
-            for ($i=0; $i < $count; $i++) { 
+            for ($i = 0; $i < $count; $i++) {
                 $narray[$i] = ['eparagraph' => $epara[$i], 'cparagraph' => $cpara[$i]];
             }
             $count1 = count($narray);
 
             // create article 
-            $checkArticle =  Article::where('id', $request->ctitle)->first();
+            $checkArticle = Article::where('id', $request->ctitle)->first();
             // $contextCount = CotextParagraph::count();
             // $prefixCon = "CON";
             // if($contextCount<1){
@@ -86,13 +90,13 @@ class ContextController extends Controller
 
             if ($checkArticle) {
                 $context = Context::create($request->except('article_id', 'article_code', 'etitle', 'ctitle') + [
-                    'article_id' => $checkArticle->id,
-                    'article_code' => $checkArticle->article_code,
-                    'etitle' => $checkArticle->title_en,
-                    'ctitle' => $checkArticle->title_cn
-                ]);
-                
-        //        $xontext= Context ::get()->where('article_id',$checkArticle->id);
+                        'article_id' => $checkArticle->id,
+                        'article_code' => $checkArticle->article_code,
+                        'etitle' => $checkArticle->title_en,
+                        'ctitle' => $checkArticle->title_cn
+                    ]);
+
+                //        $xontext= Context ::get()->where('article_id',$checkArticle->id);
 
                 if ($context) {
                     foreach ($narray as $key => $value) {
@@ -102,23 +106,21 @@ class ContextController extends Controller
 
                         $contextCount = CotextParagraph::count();
                         $prefixCon = "CON";
-                        if($contextCount<1){
-                            $contextID = $prefixCon."100000";
+                        if ($contextCount < 1) {
+                            $contextID = $prefixCon . "100000";
+                        } else {
+                            $contextID = CotextParagraph::orderBy('id', 'desc')->first()->context_no;
+                            $num = (int)preg_replace('/[^0-9]/', '', $contextID);
+                            $contextID = $prefixCon . ($num + 1);
                         }
-                        else{
-                            $contextID =CotextParagraph::orderBy('id', 'desc')->first()->context_no;
-                            $num= (int)preg_replace('/[^0-9]/', '', $contextID);
-                            $contextID=$prefixCon.($num+1);
-                        }
-                        
-                        $checkOrder = CotextParagraph::where('article_id', $context->article_id)
-                                    ->latest()->first();
-                                    
 
-                                 
+                        $checkOrder = CotextParagraph::where('article_id', $context->article_id)
+                            ->latest()->first();
+
+
                         if (!empty($checkOrder)) {
                             $order = CotextParagraph::where('article_id', $context->article_id)->max('order');
-                        }else{
+                        } else {
                             $order = 1;
                         }
                         $paraCon = new CotextParagraph;
@@ -131,25 +133,24 @@ class ContextController extends Controller
                         $paraCon->context_no = $contextID;
                         if (!empty($checkOrder)) {
                             $paraCon->order = $order + 1;
-                        }else{
+                        } else {
                             $paraCon->order = $order;
                         }
                         $paraCon->save();
                     }
                 }
             } else {
-                $articles=Article::count();
+                $articles = Article::count();
                 $prefix = "ART";
-                if($articles<1){
-                    $articleID = $prefix."100000";
-                }
-                else{
-                    $articleID =Article::orderBy('id', 'desc')->first()->article_code;
-                    $num= (int)preg_replace('/[^0-9]/', '', $articleID);
-                    $articleID=$prefix.($num+1);
+                if ($articles < 1) {
+                    $articleID = $prefix . "100000";
+                } else {
+                    $articleID = Article::orderBy('id', 'desc')->first()->article_code;
+                    $num = (int)preg_replace('/[^0-9]/', '', $articleID);
+                    $articleID = $prefix . ($num + 1);
                 }
                 $article = new Article();
-                $article->article_code=$articleID;
+                $article->article_code = $articleID;
                 $article->title_en = $request->etitle;
                 $article->source_en = $request->esource;
                 $article->content_en = $request->content_en;
@@ -160,12 +161,12 @@ class ContextController extends Controller
                 $article->note_cn = $request->cnote;
                 $article->save();
 
-                 $context = Context::create($request->except('article_id', 'article_code', 'etitle', 'ctitle') + [
-                    'article_id' => $article->id,
-                    'article_code' => $article->article_code,
-                    'etitle' => $article->title_en,
-                    'ctitle' => $article->title_cn
-                ]);
+                $context = Context::create($request->except('article_id', 'article_code', 'etitle', 'ctitle') + [
+                        'article_id' => $article->id,
+                        'article_code' => $article->article_code,
+                        'etitle' => $article->title_en,
+                        'ctitle' => $article->title_cn
+                    ]);
 
                 if ($context) {
                     foreach ($narray as $key => $value) {
@@ -175,19 +176,18 @@ class ContextController extends Controller
 
                         $contextCount = CotextParagraph::count();
                         $prefixCon = "CON";
-                        if($contextCount<1){
-                            $contextID = $prefixCon."100000";
-                        }
-                        else{
-                            $contextID =CotextParagraph::orderBy('id', 'desc')->first()->context_no;
-                            $num= (int)preg_replace('/[^0-9]/', '', $contextID);
-                            $contextID=$prefixCon.($num+1);
+                        if ($contextCount < 1) {
+                            $contextID = $prefixCon . "100000";
+                        } else {
+                            $contextID = CotextParagraph::orderBy('id', 'desc')->first()->context_no;
+                            $num = (int)preg_replace('/[^0-9]/', '', $contextID);
+                            $contextID = $prefixCon . ($num + 1);
                         }
                         $checkOrder = CotextParagraph::where('context_id', $context->id)
-                                    ->latest()->first();
+                            ->latest()->first();
                         if (!empty($checkOrder)) {
                             $order = CotextParagraph::where('context_id', $context->id)->max('order');
-                        }else{
+                        } else {
                             $order = 1;
                         }
 
@@ -201,19 +201,19 @@ class ContextController extends Controller
                         $paraCon->context_no = $contextID;
                         if (!empty($checkOrder)) {
                             $paraCon->order = $order + 1;
-                        }else{
+                        } else {
                             $paraCon->order = $order;
                         }
                         $paraCon->save();
                     }
                 }
             }
-            
+
 
             return redirect()->route('context.index');
-        }else{
-              // return redirect()->back()->with('warning' , $display);
-            return redirect()->back()->with('warning' , 'Chinese & English paragraph length does not same!'); 
+        } else {
+            // return redirect()->back()->with('warning' , $display);
+            return redirect()->back()->with('warning', 'Chinese & English paragraph length does not same!');
         }
     }
 
@@ -227,19 +227,19 @@ class ContextController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function viewmore($id)
     {
-        $context = CotextParagraph::with('paracontext','temrs')->find($id);
+        $context = CotextParagraph::with('paracontext', 'temrs')->find($id);
         return view('modules.context.viewmore', compact('context'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function editcontext($id)
@@ -251,8 +251,8 @@ class ContextController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function posteditcontext(Request $request)
@@ -310,7 +310,7 @@ class ContextController extends Controller
         }
 
         // additional term add 
-        
+
         $paraCon = new TermContext;
         $paraCon->esource = $request->esource;
         $paraCon->csource = $request->csource;
@@ -318,7 +318,7 @@ class ContextController extends Controller
         $paraCon->cparagraph = $request->cparagraph;
         $paraCon->enote = $request->enote;
         $paraCon->cnote = $request->cnote;
-        $paraCon->context_no =  mt_rand(100000, 999999);
+        $paraCon->context_no = mt_rand(100000, 999999);
         $paraCon->save();
 
         if ($paraCon) {
@@ -343,7 +343,7 @@ class ContextController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function deleteContext($id)
@@ -369,5 +369,12 @@ class ContextController extends Controller
         // $all =  $collection->merge($context);
 
         return response()->json($all);
+    }
+
+    public function import(Request $request) {
+        Validator::make($request->all(), ['file' => 'required']);
+        Excel::import(new ContextImport, request()->file('file'));
+
+        return redirect()->route('context.index');
     }
 }

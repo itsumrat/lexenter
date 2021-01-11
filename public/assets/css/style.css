@@ -10,8 +10,8 @@ body {
     margin: 0;
 }
 .login input:-webkit-autofill,
-.login input:-webkit-autofill:hover, 
-.login input:-webkit-autofill:focus, 
+.login input:-webkit-autofill:hover,
+.login input:-webkit-autofill:focus,
 .login input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px #F5F6FA inset !important;
 }
@@ -60,6 +60,21 @@ input:focus, textarea:focus, select:focus{
 .card {
     border: 0;
     border-radius: 0;
+}
+/*added*/
+.import-btn {
+    display: inline-flex;
+    text-transform: uppercase;
+    padding: 0.6rem 0 0.6rem 1.5rem;
+    color: #fff;
+    background-color: #3b86ff;
+    border: 0;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    width: 200px;
+}
+.import-btn:hover {
+    color: #fff;
 }
 /*-------------------- Dashboard Header ---------------------*/
 .dashboard-header {
@@ -156,24 +171,24 @@ input:focus, textarea:focus, select:focus{
 
 /*----------------page-wrapper----------------*/
 .page-wrapper {
-  height: 100vh;
+    height: 100vh;
 }
 .page-wrapper .theme {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  border-radius: 4px;
-  margin: 2px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 4px;
+    margin: 2px;
 }
 
 .page-wrapper .theme.chiller-theme {
-  background: #1e2229;
+    background: #1e2229;
 }
 
 /*----------------toggeled sidebar----------------*/
 
 .page-wrapper.toggled .sidebar-wrapper {
-  left: 0px;
+    left: 0px;
 }
 
 @media screen and (min-width: 768px) {
@@ -183,59 +198,59 @@ input:focus, textarea:focus, select:focus{
 }
 /*----------------show sidebar button----------------*/
 #show-sidebar {
-  position: fixed;
-  left: 0;
-  top: 10px;
-  z-index: 9;
-  border-radius: 0 4px 4px 0px;
-  width: 35px;
-  transition-delay: 0.3s;
+    position: fixed;
+    left: 0;
+    top: 10px;
+    z-index: 9;
+    border-radius: 0 4px 4px 0px;
+    width: 35px;
+    transition-delay: 0.3s;
 }
 .page-wrapper.toggled #show-sidebar {
-  left: -40px;
+    left: -40px;
 }
 /*----------------sidebar-wrapper----------------*/
 
 .sidebar-wrapper {
-  width: 265px;
-  height: 100%;
-  max-height: 100%;
-  position: fixed;
-  top: 0;
-  left: -265px;
-  z-index: 999;
+    width: 265px;
+    height: 100%;
+    max-height: 100%;
+    position: fixed;
+    top: 0;
+    left: -265px;
+    z-index: 999;
     padding: 0 1rem;
 }
 
 .sidebar-wrapper ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .sidebar-wrapper a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 /*----------------sidebar-content----------------*/
 
 .sidebar-content {
-  max-height: calc(100% - 30px);
-  height: calc(100% - 30px);
-  overflow-y: auto;
-  position: relative;
+    max-height: calc(100% - 30px);
+    height: calc(100% - 30px);
+    overflow-y: auto;
+    position: relative;
 }
 
 .sidebar-content.desktop {
-  overflow-y: hidden;
+    overflow-y: hidden;
 }
 
 /*--------------------sidebar-brand----------------------*/
 
 .sidebar-wrapper .sidebar-brand {
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
 }
 
 .sidebar-wrapper .sidebar-brand > a {
@@ -256,7 +271,7 @@ input:focus, textarea:focus, select:focus{
 /*----------------------sidebar-menu-------------------------*/
 
 .sidebar-wrapper .sidebar-menu {
-  padding-bottom: 10px;
+    padding-bottom: 10px;
 }
 .sidebar-wrapper .sidebar-menu ul li a:hover {
     background-color: rgb(82,90,101);
@@ -300,37 +315,37 @@ input:focus, textarea:focus, select:focus{
 /*------scroll bar---------------------*/
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 7px;
+    width: 5px;
+    height: 7px;
 }
 ::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
+    width: 0px;
+    height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #525965;
-  border: 0px none #ffffff;
-  border-radius: 0px;
+    background: #525965;
+    border: 0px none #ffffff;
+    border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #525965;
+    background: #525965;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #525965;
+    background: #525965;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
-  border: 0px none #ffffff;
-  border-radius: 50px;
+    background: transparent;
+    border: 0px none #ffffff;
+    border-radius: 50px;
 }
 ::-webkit-scrollbar-track:hover {
-  background: transparent;
+    background: transparent;
 }
 ::-webkit-scrollbar-track:active {
-  background: transparent;
+    background: transparent;
 }
 ::-webkit-scrollbar-corner {
-  background: transparent;
+    background: transparent;
 }
 
 
@@ -400,7 +415,7 @@ input:focus, textarea:focus, select:focus{
 }
 .login button {
     display: block;
-    background-color: #3B86FF; 
+    background-color: #3B86FF;
     border: none;
     color: #fff;
     padding: 10px 40px;
@@ -494,11 +509,12 @@ tbody tr td, tbody tr td a {
 .article-list .new-article-btn {
     display: inline-flex;
     text-transform: uppercase;
-    padding: 0.6rem 2.3rem 0.6rem 2rem;
+    padding: 0.6rem 0 0.6rem 2rem;
     color: #fff;
     background-color: #3b86ff;
     border: 0;
     border-radius: 4px;
+    width: 220px;
     margin-bottom: 2rem;
 }
 .article-list .new-article-btn:hover {
@@ -535,7 +551,107 @@ tbody tr td, tbody tr td a {
     border: 0;
     border-radius: 4px;
 }
-
+.file-upload {
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    float: right;
+}
+.file-upload .file-select {
+    display: inline-block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+.file-upload .file-select .file-select-button {
+    background: #dce4ec;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+.file-upload .file-select .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 35px;
+}
+.file-upload .file-select:hover {
+    border-color: #3b86ff;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+.file-upload .file-select:hover .file-select-button {
+    background: #3b86ff;
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+.file-upload.active .file-select {
+    border-color: #3b86ff;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+.file-upload.active .file-select .file-select-button {
+    background: #3b86ff;
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+.file-upload .file-select input[type="file"] {
+    z-index: 100;
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.file-upload .file-select.file-select-disabled {
+    opacity: 0.65;
+}
+.file-upload .file-select.file-select-disabled:hover {
+    cursor: default;
+    display: block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    text-align: left;
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+.file-upload .file-select.file-select-disabled:hover .file-select-button {
+    background: #dce4ec;
+    color: #666666;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+}
 /*--------- Advance Search ----------*/
 .search-box {
     background-color: #fff;
@@ -576,60 +692,60 @@ tbody tr td, tbody tr td a {
     border-radius: 4px;
 }
 .avatar-upload {
-  position: relative;
-  max-width: 205px;
+    position: relative;
+    max-width: 205px;
 }
 .avatar-upload .avatar-edit {
-  position: absolute;
-  right: 12px;
-  z-index: 1;
-  top: 10px;
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 10px;
 }
 @media screen and (max-width: 576px) {
     .avatar-upload .avatar-edit {
-      right: 62px;
+        right: 62px;
     }
 }
 .avatar-upload .avatar-edit input {
-  display: none;
+    display: none;
 }
 .avatar-upload .avatar-edit input + label:hover {
-  background: #f1f1f1;
-  border-color: #d6d6d6;
+    background: #f1f1f1;
+    border-color: #d6d6d6;
 }
 .avatar-upload .avatar-edit input + label:after {
-  content: "\e439";
-  font-family: 'Material Icons';
-  color: #777;
-  font-size: 24px;
-  position: absolute;
-  top: 7px;
-  left: -50px;
-  right: 0;
-  text-align: center;
-  margin: auto;
+    content: "\e439";
+    font-family: 'Material Icons';
+    color: #777;
+    font-size: 24px;
+    position: absolute;
+    top: 7px;
+    left: -50px;
+    right: 0;
+    text-align: center;
+    margin: auto;
 }
 .avatar-upload .avatar-preview {
-  width: 152px;
-  height: 152px;
-  position: relative;
-  border-radius: 100%;
-  margin: 0 auto;
-  margin-bottom: 1rem;
+    width: 152px;
+    height: 152px;
+    position: relative;
+    border-radius: 100%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
 }
 @media screen and (max-width: 576px) {
     .avatar-upload .avatar-preview {
-      width: 135px;
-      height: 135px;
+        width: 135px;
+        height: 135px;
     }
 }
 .avatar-upload .avatar-preview > div {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /*--------- User Create ---------*/
@@ -678,4 +794,12 @@ tbody tr td, tbody tr td a {
 span.term-group {
     color: #333;
     font-weight: 500;
+}
+
+.admin-actionbtn.delete-btn {
+    background-color: transparent;
+    border: 0;
+}
+.admin-actionbtn.favourite.booked {
+    color: blue;
 }
