@@ -17,17 +17,6 @@ class ContextImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $contex_data = [
-            'esource' => $row['e_source'],
-            'etitle' => $row['e_title'],
-            'enote' => $row['e_note'],
-            'csource' => $row['c_source'],
-            'ctitle' => $row['c_title'],
-            'cnote' => $row['c_note'],
-        ];
-
-
-        // create article
         $article = Article::where('title_en', $row['e_article_title'])->first();
         if (!$article) {
             $articles = Article::count();
@@ -41,13 +30,13 @@ class ContextImport implements ToModel, WithHeadingRow
             }
             $article = new Article();
             $article->article_code = $articleID;
-            $article->title_en = $row['e_title'];
-            $article->source_en = $row['e_source'];
-            $article->note_en = $row['e_note'];
-            $article->title_cn = $row['c_title'];
-            $article->source_cn = $row['c_source'];
+            $article->title_en = $row['e_article_title'];
+            $article->source_en = null; //$row['e_source'];
+            $article->note_en = null; //$row['e_note'];
+            $article->title_cn = $row['c_article_title'];
+            $article->source_cn = null; //$row['c_source'];
             $article->content_cn = null; //$row['content_cn'];
-            $article->note_cn = $row['c_note'];
+            $article->note_cn = null; //$row['c_note'];
             $article->save();
         }
 
@@ -78,8 +67,8 @@ class ContextImport implements ToModel, WithHeadingRow
             $paraCon->article_id = $article->id;
             $paraCon->esource = $row['e_source'];
             $paraCon->csource = $row['c_source'];
-            $paraCon->eparagraph = $row['e_title'];
-            $paraCon->cparagraph = $row['c_title'];
+            $paraCon->eparagraph = $row['e_contex'];
+            $paraCon->cparagraph = $row['c_contex'];
             $paraCon->context_no = $contextID;
 
             if (!empty($checkOrder)) {

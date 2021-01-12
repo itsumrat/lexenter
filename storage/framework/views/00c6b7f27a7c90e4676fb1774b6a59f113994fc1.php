@@ -14,7 +14,7 @@
                     		<h1>context list</h1>
                     	</div>
                         <div class="main-content article-list">
-                            <a href="<?php echo e(route('context.create')); ?>" class="new-article-btn"><span class="material-icons">post_add</span>Create Article</a>
+                            <a href="<?php echo e(route('context.create')); ?>" class="new-article-btn"><span class="material-icons">post_add</span>Create Contex</a>
 
                             <div class="file-upload">
                                 <form action="<?php echo e(route('contex-import')); ?>" method="POST" enctype="multipart/form-data">
@@ -23,8 +23,9 @@
                                         <div class="file-select-button" id="fileName">Choose File</div>
                                         <div class="file-select-name" id="noFile">No file chosen...</div>
                                         <input type="file" name="file" id="chooseFile">
+                                        <span class="text-danger"><?php echo e($errors->first('file')); ?></span>
                                     </div>
-                                    <button type="submit" class="btn import-btn"><span class="material-icons">publish</span> Import Article</button>
+                                    <button type="submit" class="btn import-btn"><span class="material-icons">publish</span> Import Contex</button>
                                 </form>
                             </div>
                     		<table id="context-lists" class="table" style="width:100%">
