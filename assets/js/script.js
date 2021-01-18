@@ -31,6 +31,7 @@ $("#show-sidebar").click(function() {
 $('#context-list').DataTable({
     "ordering": false,
     "scrollX": true,
+    "paging":   false,
     "bAutoWidth": false , 
     aoColumns : [
         { "sWidth": "45%"},
