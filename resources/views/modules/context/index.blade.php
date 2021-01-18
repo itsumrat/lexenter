@@ -14,7 +14,7 @@
                     		<h1>context list</h1>
                     	</div>
                         <div class="main-content article-list">
-                            <a href="{{route('context.create')}}" class="new-article-btn"><span class="material-icons">post_add</span>Create Contex</a>
+                            <a href="{{route('context.create')}}" class="new-article-btn"><span class="material-icons">post_add</span>Create Context</a>
 
                             <div class="file-upload">
                                 <form action="{{ route('contex-import') }}" method="POST" enctype="multipart/form-data">
@@ -25,15 +25,15 @@
                                         <input type="file" name="file" id="chooseFile">
                                         <span class="text-danger">{{ $errors->first('file') }}</span>
                                     </div>
-                                    <button type="submit" class="btn import-btn"><span class="material-icons">publish</span> Import Contex</button>
+                                    <button type="submit" class="btn import-btn"><span class="material-icons">publish</span> Import Context</button>
                                 </form>
                             </div>
                     		<table id="context-lists" class="table" style="width:100%">
                                 <thead>
                                     <tr>
                                         {{-- <th>Article Title</th> --}}
-                                        <th>Chi Context</th>
-                                        <th>Eng Context</th>
+                                        <th>Chinese Context</th>
+                                        <th>English Context</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -79,85 +79,64 @@
         </main>
       <!-- page-content" -->
       <!-- Context Information Modal -->
-        <div class="modal fade" id="context-info-modal" tabindex="-1" role="dialog" aria-labelledby="context-info-modalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal" id="context-info-modal" tabindex="-1" role="dialog" aria-labelledby="context-info-modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" style="border-bottom: 0">
                         <h5 class="modal-title" id="context-info-modalTitle">Context Information</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="eng-context-info">
-                                        <h5>Chinese</h5>
-                                        <span id="carticle_code"></span><br>
-                                        <span id="articleC"></span><br>
-                                        <span id="ccontext_id"></span><br>
-                                        <span id="csource"></span><br>
-                                        <span id="corder"></span><br>
-                                        <p><span>Term:</span><span id="cterm"></span></p>
-                                        <span id="cnote"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="chi-context-info">
-                                        <h5>English</h5>
-                                        <span id="earticle_code"></span><br>
-                                      
-                                        <span id="articleE"></span><br>
-                                        <span id="econtext_id"></span><br>
-                                        <span id="esource"></span><br>
-                                        <span id="eorder"></span><br>
-                                        <p><span>Term:</span><span id="eterm"></span></p>
-                                        <span id="enote"></span>
-                                    </div>
-                                </div>
-                                <!--<div class="col-md-12">-->
-                                <!--    <table class="table test">-->
-                                <!--        <thead>-->
-                                <!--            <tr>-->
-                                <!--                <th>Chinese</th>-->
-                                <!--                <th>English</th>-->
-                                <!--            </tr>-->
-                                <!--        </thead>-->
-                                <!--        <tbody>-->
-                                <!--            <tr>-->
-                                <!--                <td id="carticle_code"></td>-->
-                                <!--                <td id="earticle_code"></td>-->
-                                <!--            </tr>-->
-                                <!--            <tr>-->
-                                <!--                <td id="articleC"></td>-->
-                                <!--                <td id="articleE"></td>-->
-                                <!--            </tr>-->
-                                <!--            <tr>-->
-                                <!--                <td id="ccontext_id"></td>-->
-                                <!--                <td id="econtext_id"></td>-->
-                                <!--            </tr>-->
-                                <!--            <tr>-->
-                                <!--                <td id="csource"></td>-->
-                                <!--                <td id="esource"></td>-->
-                                <!--            </tr>-->
-                                <!--            <tr>-->
-                                <!--                <td id="corder"></td>-->
-                                <!--                <td id="eorder"></td>-->
-                                <!--            </tr>-->
-                                <!--            <tr>-->
-                                <!--                <td id="cterm"></td>-->
-                                <!--                <td id="eterm"></td>-->
-                                <!--            </tr>-->
-                                <!--            <tr>-->
-                                <!--                <td id="cnote"></td>-->
-                                <!--                <td id="enote"></td>-->
-                                <!--            </tr>-->
-                                <!--        </tbody>-->
-                                <!--    </table>-->
-                                <!--</div>-->
-                            </div>
-                        </div>
+                    <div class="modal-body" style="padding: 0">
+                        <table class="table table-bordered" style="margin-bottom: 0">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 16%;border-bottom-width: 0;">Criteria</th>
+                                    <th scope="col" style="width: 42%;border-bottom-width: 0;">Chinese</th>
+                                    <th scope="col" style="width: 42%;border-bottom-width: 0;">English</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Article ID</th>
+                                    <td id="carticle_code"></td>
+                                    <td id="earticle_code"></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="row">Article Title</th>
+                                    <td id="articleC"></td>
+                                    <td id="articleE"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Context ID</th>
+                                    <td id="ccontext_id"></td>
+                                    <td id="econtext_id"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Context Order</th>
+                                    <td id="corder"></td>
+                                    <td id="eorder"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Source</th>
+                                    <td id="csource"></td>
+                                    <td id="esource"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Term</th>
+                                    <td id="cterm"></td>
+                                    <td id="eterm"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Note</th>
+                                    <td id="cnote"></td>
+                                    <td id="enote"></td>
+                                </tr>
+
+                            </tbody>
+
                     </div>
                 </div>
             </div>
@@ -207,27 +186,27 @@
            var context = $(this).attr('data-id');
            var con = JSON.parse(context);
 
-           
            var tt = con.temrs;
-           $("#carticle_code").html("Article ID:" +  con.paracontext.article_code);
-           $("#ccontext_id").html("Context ID:" +  con.context_no);
-           $("#articleC").html("Article:" +  con.paracontext.ctitle);
-           $("#corder").html("Context Order:" +  con.order);
-           $("#csource").html("Source:"  + '<a href="" target="_blank">' + con.paracontext.csource + '</a>');
+           
+           $("#carticle_code").html(con.paracontext.article_code);
+           $("#ccontext_id").html(con.context_no);
+           $("#articleC").html(con.paracontext.ctitle);
+           $("#corder").html(con.order);
+           $("#csource").html('<a href="" target="_blank">' + con.paracontext.csource + '</a>');
            $.each(tt, function(index, value){
                 $("#cterm").append(" " + value.cterms + ',');
            });
-           $("#cnote").html("Note:" +  con.paracontext.cnote);
-           $("#earticle_code").html("Article ID:" +  con.paracontext.article_code);
+           $("#cnote").html( con.paracontext.cnote);
+           $("#earticle_code").html(con.paracontext.article_code);
 
-           $("#econtext_id").html("Context ID:" +  con.context_no);
-           $("#articleE").html("Article:" +  con.paracontext.etitle);
-           $("#esource").html("Source:"  + '<a href="" target="_blank">' + con.paracontext.esource + '</a>');
-           $("#eorder").html("Context Order:" +  con.order);
+           $("#econtext_id").html(con.context_no);
+           $("#articleE").html(con.paracontext.etitle);
+           $("#esource").html('<a href="" target="_blank">' + con.paracontext.esource + '</a>');
+           $("#eorder").html(con.order);
            $.each(tt, function(index, value){
                 $("#eterm").append(" " + value.eterms + ',');
            });
-           $("#enote").html("Note:" +  con.paracontext.enote);
+           $("#enote").html( con.paracontext.enote);
         });
 
         $( ".contextEditTerm" ).click(function() {

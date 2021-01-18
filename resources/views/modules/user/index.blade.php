@@ -27,7 +27,7 @@
                                                 <div class="col-md-8">
                                                     <div class="card-body">
                                                     {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline', 'class'=>'delete_form']) !!}
-                                                    <button class="del-user" type="submit">
+                                                    <button class="delete-btn del-user" style="float: right;color: #007bff; border: none;background: none !important;" type="submit">
                                                     <span class="material-icons">delete_forever</span>
                                                     </button>
                                                     {!! Form::close() !!}
@@ -88,7 +88,10 @@
             </div>
         </main>
       <!-- page-content" -->
-      <div class="modal" id="rolechange-modal" tabindex="-1" role="dialog" aria-labelledby="rolechange-modalTitle" aria-hidden="true">
+                                                            
+                                                            
+
+<div class="modal" id="rolechange-modal" tabindex="-1" role="dialog" aria-labelledby="rolechange-modalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +104,7 @@
             {!! Form::open(['route' => 'user.update','action' => 'POST','name' => 'editRoleForm']) !!}
                         {!! Form::hidden('id',old('id'),['id' => 'id']); !!}                      
                         {!! Form::select('role_id',\App\Util::getUserRole(),
-                                            array('id' => 'role_id'),['placeholder'=>'Select One',
+                                            array('id' => 'role_id'),['placeholder'=>'Select One', 'class'=> 'form-control'
                                             ])
                                             !!}
                         <button type="submit" id="btn-save" name="btnsave" class="btn btn-primary">save</button>

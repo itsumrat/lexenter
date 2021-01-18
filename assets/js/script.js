@@ -30,7 +30,14 @@ $("#show-sidebar").click(function() {
 
 $('#context-list').DataTable({
     "ordering": false,
-    "scrollX": true
+    "scrollX": true,
+    "bAutoWidth": false , 
+    aoColumns : [
+        { "sWidth": "45%"},
+        { "sWidth": "45%"},
+        { "sWidth": "10%"},
+  
+      ]
 });
 $('#article-list').DataTable({
     "ordering": false

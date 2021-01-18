@@ -43,7 +43,7 @@
                                         </a>
                                         </td>
                                         <td>{{ $article->title_en }} <br> {{ $article->title_cn }}</td>
-                                        <td>{{ $article->source_cn }} <br> {{ $article->source_en }}</td>
+                                        <td><a href="{{ $article->source_cn }}" target="_blank">{{ $article->source_cn }} </a><br><a href=" {{ $article->source_en }}" target="_blank"> {{ $article->source_en }}</a></td>
                                         <td>
                                         {!! Form::open(['method' => 'DELETE','route' => ['article.destroy', $article->id],'style'=>'display:inline', 'class'=>'delete_form']) !!}
                                         <button class="admin-actionbtn delete-btn" type="submit">

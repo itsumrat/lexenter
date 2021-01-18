@@ -49,10 +49,13 @@ class UserController extends Controller
             ]);
         $randpass= Str::random(8);;
 
+            $avatar = 'user.png';
+
         $user = new USER();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($randpass);
+        $user->image = $avatar;
         $user->role_id= $request->role_id;
     
         $details = [

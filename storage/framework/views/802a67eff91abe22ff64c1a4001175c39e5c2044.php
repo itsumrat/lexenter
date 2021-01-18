@@ -26,7 +26,7 @@
                                                     <div class="card-body">
                                                     <?php echo Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline', 'class'=>'delete_form']); ?>
 
-                                                    <button class="del-user" type="submit">
+                                                    <button class="delete-btn del-user" type="submit">
                                                     <span class="material-icons">delete_forever</span>
                                                     </button>
                                                     <?php echo Form::close(); ?>

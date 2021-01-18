@@ -26,6 +26,7 @@
 		<div style="min-height: 100vh;display: flex;align-items: center;justify-content: center;">
 			<div class="login">
 				<p style="text-align: center;">We will send password reset link to your email.</p>
+
                 <form method="POST" action="{{ route('password.email') }}">
                         @csrf                         
                                 <input id="email" type="email" placeholder="Type your email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -38,7 +39,12 @@
                                     {{ __('Reset') }}
                                 </button>
                     </form>
-                
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                 
                 
                 <!-- <form control="" action="context-list.php">
