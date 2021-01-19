@@ -19,12 +19,10 @@
                     <form id="avanSearch" method="GET">
                         <?php echo csrf_field(); ?>
                         <input class="search-term" id="termtext" placeholder="Search term with text" type="text">
-                            <input class="search-term mt-2" id="contextsear" placeholder="Search context with text" type="text">
-                                <button class="mt-2" type="submit">
-                                    search
-                                </button>
-                            </input>
-                        </input>
+                        <input class="search-term mt-2" id="contextsear" placeholder="Search context with text" type="text">
+                        <button class="mt-2" type="submit">
+                            search
+                        </button>
                     </form>
                 </div>
             </div>
@@ -251,14 +249,14 @@
             }
         });
          $("#avanSearch").submit(function(e) {
-           e.preventDefault(); 
+           e.preventDefault();
            var termtext = $('#termtext').val();
            var contextsear = $('#contextsear').val();
            if (contextsear) {
             $.ajax({
                url: '/advancedSearchContext/',
                type: "GET",
-               data: {contextsear:contextsear},
+               data: {contextsear:contextsear, termtext:termtext},
                dataType: "json",
                success: function(data) {
                 var result = '';
@@ -314,7 +312,7 @@
                               $("#cterm").append(" " + value.cterms + ',');
                          });
                          $("#cnote").html("Note:" +  data.paracontext.cnote);
-                         
+
                          $("#articleIDe").html("Article ID:" +  data.paracontext.article_code);
                          $("#econtext_id").html("Context ID:" +  data.context_no);
                          $("#articleEm").html("Article:" +  data.paracontext.etitle);
@@ -400,7 +398,7 @@
                }
             });
            }
-           
+
        });
     });
 </script>

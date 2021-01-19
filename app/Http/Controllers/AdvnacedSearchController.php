@@ -10,6 +10,7 @@ use App\Model\SearchTerm;
 use App\Model\TermEngCha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class AdvnacedSearchController extends Controller
 {
@@ -106,6 +107,7 @@ class AdvnacedSearchController extends Controller
     {
 
         $contextsear = $request->contextsear;
+        $eterms = $request->eterms;
 
         if (!empty($contextsear)) {
             SearchContext::create($request->except('user_id', 'search_end_con', 'search_chi_con') + [
@@ -115,8 +117,24 @@ class AdvnacedSearchController extends Controller
             ]);
         }
 
-        $contexttt = CotextParagraph::with('paracontext','temrs')->where('eparagraph','LIKE','%'.$contextsear.'%')
-                                ->orWhere('cparagraph','LIKE','%'.$contextsear.'%')->get();
+        //$my_query = "select *, MATCH (name) AGAINST (?) from users where MATCH (hobbies) AGAINST (? IN BOOLEAN MODE) limit 10 OFFSET ?"
+        //$hobbies = DB::select($my_query, array($search_term, $search_term, (($page-1)*10)));
+
+//        $data = CotextParagraph::selectRaw("*, MATCH(eparagraph)AGAINST($contextsear)")
+//            ->whereRaw("MATCH(eparagraph)AGAINST($contextsear IN BOOLEAN MODE)")
+//            ->take(10);
+
+        $contexttt = CotextParagraph::WhereRaw("MATCH(eparagraph) AGAINST(?)",$contextsear)->get();
+
+//        $contexttt = CotextParagraph::with('paracontext','temrs')->where('eparagraph','LIKE','%'.$contextsear)
+//                                ->orWhere('cparagraph','LIKE','%'.$contextsear)->get();
+
+//        $contexttt = CotextParagraph::with('paracontext','temrs')
+//                                    ->when(isset($contextsear), function ($query) use ($contextsear) {
+//                                        $query->WhereRaw("MATCH(eparagraph) AGAINST('$contextsear')");
+//                                    })->when(isset($eterms), function ($query) use ($eterms) {
+//                                        $query->WhereRaw("MATCH(eterms) AGAINST('$eterms')");
+//                                    })->get();
 
         return response()->json($contexttt);
     }
