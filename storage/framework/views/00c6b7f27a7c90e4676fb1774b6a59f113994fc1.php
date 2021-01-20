@@ -195,7 +195,7 @@
            $("#ccontext_id").html(con.context_no);
            $("#articleC").html(con.paracontext.ctitle);
            $("#corder").html(con.order);
-           $("#csource").html('<a href="" target="_blank">' + con.paracontext.csource + '</a>');
+           $("#csource").html('<a href="' + con.paracontext.csource + '" target="_blank">' + con.paracontext.csource + '</a>');
            $.each(tt, function(index, value){
                 $("#cterm").append(" " + value.cterms + ',');
            });
@@ -204,7 +204,7 @@
 
            $("#econtext_id").html(con.context_no);
            $("#articleE").html(con.paracontext.etitle);
-           $("#esource").html('<a href="" target="_blank">' + con.paracontext.esource + '</a>');
+           $("#esource").html('<a href="'+ con.paracontext.esource +'" target="_blank">' + con.paracontext.esource + '</a>');
            $("#eorder").html(con.order);
            $.each(tt, function(index, value){
                 $("#eterm").append(" " + value.eterms + ',');
