@@ -128,7 +128,7 @@ class AdvnacedSearchController extends Controller
 //                                    ->orWhere(function ($query) use($contextsear) {
 //                                        $query->WhereRaw("MATCH(cparagraph) AGAINST(?)", $contextsear);
 //                                    })
-                                    ->orWhere('cparagraph','LIKE','%'.$contextsear)
+                                    ->orWhere('cparagraph','like', '%' . $contextsear . '%')
                                     ->get();
 
 //        $contexttt = CotextParagraph::with('paracontext','temrs')->where('eparagraph','LIKE','%'.$contextsear)
