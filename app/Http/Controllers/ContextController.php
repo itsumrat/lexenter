@@ -373,6 +373,7 @@ class ContextController extends Controller
 
     public function import(Request $request) {
         Validator::make($request->all(), ['file' => 'required'])->validate();
+        set_time_limit(0);
         Excel::import(new ContextImport, request()->file('file'));
 
         return redirect()->route('context.index');

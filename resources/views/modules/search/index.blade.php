@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
-                <div id="showResult">
+                <div id="showResult" style="padding: 1.2rem">
                 </div>
             </div>
             <div class="row" id="termHide" style="display: none">
