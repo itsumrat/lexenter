@@ -87,6 +87,9 @@
             width: 25%;
             padding-left: 0.75rem;
         }
+        mark, .mark {
+            background-color: #ffd600;
+        }
     </style>
     <div aria-hidden="true" aria-labelledby="context-info-modalTitle" class="modal fade" id="context-info-modal"
          role="dialog" tabindex="-1">
@@ -257,6 +260,7 @@
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/mark.js/8.6.0/jquery.mark.min.js"></script>
     <script>
         $(document).ready(function () {
             $.ajaxSetup({
@@ -340,7 +344,10 @@
                                     });
                                 }
                             });
-                        }
+                        },
+                        complete: function () {
+                            $("#showResult").mark(contextsear, {});
+                        },
                     });
                 }
                 if (termtext) {
